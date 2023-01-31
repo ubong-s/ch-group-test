@@ -1,0 +1,22 @@
+.book {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+  border: 1px solid var(--black);
+}
+
+.book button {
+  border: 1px solid black;
+}
+
+.info h4 {
+  margin-bottom: 1rem;
+}
+
+.authors {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}

@@ -1,12 +1,12 @@
-import React from 'react';
 import { ResultList } from './ResultList';
 import { ToReadList } from './ToReadList';
+import styles from '@/styles/components/Lists.module.css';
 
 export const Lists = () => {
   return (
-    <div>
+    <section className={styles.lists}>
       <ResultList />
       <ToReadList />
-    </div>
+    </section>
   );
 };

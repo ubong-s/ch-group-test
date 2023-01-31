@@ -1,0 +1,8 @@
+.results h2 {
+  margin-bottom: 1rem;
+}
+
+.results ul {
+  display: grid;
+  gap: 1rem;
+}
