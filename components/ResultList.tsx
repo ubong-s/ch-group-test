@@ -1,5 +1,3 @@
-const ResultList = () => {
+export const ResultList = () => {
   return <div>ResultList</div>;
 };
-
-export default ResultList;

@@ -1,0 +1,25 @@
+.search {
+  margin-bottom: 2rem;
+}
+
+.search h2 {
+  margin-bottom: 1rem;
+}
+
+.form input {
+  margin-bottom: 1rem;
+  height: 100%;
+}
+
+.form button {
+  padding: 0.75rem 2rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+}

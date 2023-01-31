@@ -129,36 +129,35 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
 /* Reset CSS End */
 
 /* CSS Variables Start */
 :root {
+  /* misc */
   --max-width: 1100px;
-  --border-radius: 12px;
+  --radius: 5px;
+
+  /* fonts */
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
-
-  --white: #000000;
+  /* colors */
+  --white: #ffffff;
   --black: #000000;
   --concrete: #f3f3f3;
   --link-water: #cfe2f3;
   --denim: #1057cd;
   --dusty-gray: #9a9a9a;
 }
-
 /* CSS Variables End */
 
+/* Default Styles Start */
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: var(--font-mono);
 }
 
 html,
@@ -168,13 +167,18 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--black);
+  background: var(--white);
+  font-family: var(--font-mono);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
 }
 
 a {
@@ -182,8 +186,21 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+input {
+  width: 100%;
+  padding: 0.75rem;
+  outline: none;
+  border: var(--black) 1px solid;
+  border-radius: var(--radius);
+  font-size: 1rem;
 }
+
+button {
+  background-color: var(--denim);
+  color: var(--white);
+  padding: 0.75rem;
+  border: none;
+  border-radius: var(--radius);
+  width: 100%;
+}
+/* Default Styles End */

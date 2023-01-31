@@ -6,3 +6,15 @@
   padding: 6rem;
   min-height: 100vh;
 }
+
+.container {
+  width: 90%;
+  max-width: var(--max-width);
+  margin: auto;
+}
+
+@media screen and (min-width: 1024px) {
+  .main {
+    height: 100vh;
+  }
+}
