@@ -3,6 +3,7 @@ import Image from 'next/image';
 import placeholderImage from '@/public/images/placeholder-image.png';
 import styles from '@/styles/components/BookCard.module.css';
 import { BookToReadProps } from '@/types';
+import { useBooksContext } from '@/context';
 
 interface BookCardProps {
   id: number;
@@ -13,8 +14,6 @@ interface BookCardProps {
     birth_year: number;
     death_year: number;
   }[];
-  addBookToList: (book: BookToReadProps) => void;
-  checkBookInReadlist: (id: number) => boolean;
   bookRef?: any;
 }
 
@@ -23,10 +22,21 @@ export const BookCard: FC<BookCardProps> = ({
   title,
   imageUrl,
   authors,
-  addBookToList,
-  checkBookInReadlist,
   bookRef,
 }) => {
+  const [state, setState] = useBooksContext();
+
+  const addBookToList = (book: BookToReadProps) => {
+    setState({
+      ...state,
+      toReadList: state.toReadList.concat(book),
+    });
+  };
+
+  const checkBookInReadlist = (id: number): boolean => {
+    return state.toReadList.find((book) => book.id === id) ? true : false;
+  };
+
   return (
     <li ref={bookRef}>
       <article className={styles.book}>

@@ -11,6 +11,10 @@
   gap: 1rem;
 }
 
+.results .notification {
+  margin-top: 1rem;
+}
+
 @media screen and (min-width: 1024px) {
   .results ul {
     max-height: 70vh;

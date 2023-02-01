@@ -1,49 +1,80 @@
 import { BookCard } from './BookCard';
 import styles from '@/styles/components/ResultList.module.css';
-import { BookProps, BookToReadProps } from '@/types';
-import { FC, useRef, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
+import { useBooksContext } from '@/context';
 
-export const ResultList: FC<{
-  loading: boolean;
-  query: string;
-  bookList: BookProps[];
-  addBookToList: (book: BookToReadProps) => void;
-  checkBookInReadlist: (id: number) => boolean;
-  handleSearch: () => void;
-}> = ({
-  loading,
-  query,
-  bookList,
-  addBookToList,
-  checkBookInReadlist,
-  handleSearch,
-}) => {
+export const ResultList = () => {
+  const [state, setState] = useBooksContext();
   const observerRef = useRef<IntersectionObserver>();
+
+  const handleMoreBooksSearch = async (): Promise<void> => {
+    setState({
+      ...state,
+      error: null,
+      isLoading: true,
+    });
+    try {
+      if (state.queryMore) {
+        const response = await fetch(state.queryMore);
+
+        if (response.status === 200) {
+          const data = await response.json();
+
+          setState({
+            ...state,
+            isLoading: false,
+            bookList: [...state.bookList, ...data.results],
+            queryMore: data.next || null,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      setState({
+        ...state,
+        isLoading: false,
+        error: 'Error fetching books',
+      });
+    }
+  };
 
   const lastBook = useCallback(
     (node: any) => {
-      if (loading) return;
+      if (state.isLoading) return;
       if (observerRef.current) observerRef.current.disconnect();
       observerRef.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
-          handleSearch();
+          handleMoreBooksSearch();
         }
       });
       if (node) observerRef.current.observe(node);
     },
-    [loading]
+    // eslint-disable-next-line
+    [state.isLoading]
   );
 
   return (
     <div className={styles.results}>
-      {bookList.length < 1 ? (
-        <h3>Search books</h3>
+      {state.bookList.length < 1 ? (
+        <>
+          <h3>Search books</h3>
+          {state.error && (
+            <h3 className={styles.notification}>
+              <h3>{state.error}</h3>
+            </h3>
+          )}
+        </>
       ) : (
         <>
           <h2>Result List</h2>
+          {state.error && (
+            <h3 className={styles.notification}>
+              <h3>{state.error}</h3>
+            </h3>
+          )}
           <ul>
-            {bookList.map((book, index) => {
-              if (bookList.length === index + 1) {
+            {state.bookList.map((book, index) => {
+              if (state.bookList.length === index + 1) {
                 return (
                   <BookCard
                     bookRef={lastBook}
@@ -52,8 +83,6 @@ export const ResultList: FC<{
                     title={book.title}
                     imageUrl={book.formats['image/jpeg']}
                     authors={book.authors}
-                    addBookToList={addBookToList}
-                    checkBookInReadlist={checkBookInReadlist}
                   />
                 );
               }
@@ -64,15 +93,13 @@ export const ResultList: FC<{
                   title={book.title}
                   imageUrl={book.formats['image/jpeg']}
                   authors={book.authors}
-                  addBookToList={addBookToList}
-                  checkBookInReadlist={checkBookInReadlist}
                 />
               );
             })}
           </ul>
         </>
       )}
-      {loading && <h3>Loading....</h3>}
+      {state.isLoading && <h3 className={styles.notification}>Loading....</h3>}
     </div>
   );
 };
