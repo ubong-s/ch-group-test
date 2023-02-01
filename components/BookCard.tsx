@@ -25,11 +25,12 @@ export const BookCard: FC<BookCardProps> = ({ title, imageUrl, authors }) => {
         />
         <div className={styles.info}>
           <h4>{title}</h4>
-          <span className={styles.authors}>
+          <p className={styles.authors}>
+            By:
             {authors.map((author, index) => (
-              <p key={index}>{author.name}</p>
+              <span key={index}>{author.name}</span>
             ))}
-          </span>
+          </p>
         </div>
         <button>Pick</button>
       </article>

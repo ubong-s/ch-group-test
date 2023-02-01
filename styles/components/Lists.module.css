@@ -1,12 +1,15 @@
 .lists {
+  position: relative;
   display: grid;
   gap: 1rem;
-  height: 100%;
 }
 
 @media screen and (min-width: 1024px) {
   .lists {
+    padding-top: 1rem;
     grid-template-columns: 1fr 0.8fr;
+    align-items: flex-start;
     gap: 2rem;
+    max-height: 70vh;
   }
 }

@@ -163,13 +163,26 @@ table {
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
 }
 
 body {
   color: var(--black);
   background: var(--white);
   font-family: var(--font-mono);
+  min-height: 100vh;
+  padding: 4rem 0 2rem;
+}
+
+body:-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+body:-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+body:-webkit-scrollbar-thumb {
+  background-color: var(--dusty-gray);
 }
 
 h1,

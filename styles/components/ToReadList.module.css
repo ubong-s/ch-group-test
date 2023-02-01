@@ -1,0 +1,21 @@
+.to__read {
+  padding: 1rem;
+  margin-top: 2rem;
+  border: 1px solid var(--black);
+  background-color: var(--link-water);
+}
+
+.to__read h2 {
+  margin-bottom: 1rem;
+}
+
+.to__read ul {
+  display: grid;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .to__read {
+    height: 60vh;
+  }
+}
