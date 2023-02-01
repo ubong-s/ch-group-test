@@ -12,6 +12,7 @@ interface ListProps {
   addBookToList: (book: BookToReadProps) => void;
   removeBookFromList: (id: number) => void;
   checkBookInReadlist: (id: number) => boolean;
+  handleSearch: () => void;
 }
 
 export const Lists: FC<ListProps> = ({
@@ -22,6 +23,7 @@ export const Lists: FC<ListProps> = ({
   addBookToList,
   removeBookFromList,
   checkBookInReadlist,
+  handleSearch,
 }) => {
   return (
     <section className={styles.lists}>
@@ -31,6 +33,7 @@ export const Lists: FC<ListProps> = ({
         bookList={bookList}
         addBookToList={addBookToList}
         checkBookInReadlist={checkBookInReadlist}
+        handleSearch={handleSearch}
       />
       <ToReadList
         toReadList={toReadList}

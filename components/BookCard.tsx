@@ -15,6 +15,7 @@ interface BookCardProps {
   }[];
   addBookToList: (book: BookToReadProps) => void;
   checkBookInReadlist: (id: number) => boolean;
+  bookRef?: any;
 }
 
 export const BookCard: FC<BookCardProps> = ({
@@ -23,11 +24,11 @@ export const BookCard: FC<BookCardProps> = ({
   imageUrl,
   authors,
   addBookToList,
-
   checkBookInReadlist,
+  bookRef,
 }) => {
   return (
-    <li>
+    <li ref={bookRef}>
       <article className={styles.book}>
         <Image
           src={imageUrl || placeholderImage}

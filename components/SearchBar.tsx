@@ -3,7 +3,7 @@ import { FC, ChangeEvent, FormEvent } from 'react';
 
 interface SearchBarProps {
   query: string;
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleSubmit: () => void;
   handleQueryChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -14,7 +14,13 @@ export const SearchBar: FC<SearchBarProps> = ({
 }) => {
   return (
     <section className={styles.search}>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form
+        className={styles.form}
+        onSubmit={(e: FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
         <input
           type='text'
           placeholder='Search for...'

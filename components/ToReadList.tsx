@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styles from '@/styles/components/ToReadList.module.css';
 import { BookToReadProps } from '@/types';
 import { BookToReadCard } from './BookToReadCard';
@@ -12,6 +12,12 @@ export const ToReadList: FC<ToReadListProps> = ({
   toReadList,
   removeBookFromList,
 }) => {
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      window.localStorage.setItem('books', JSON.stringify(toReadList));
+    }
+  }, [toReadList]);
+
   return (
     <div className={styles.to__read}>
       <h2>To-read list</h2>
