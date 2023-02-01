@@ -26,7 +26,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Overview
 
-![screenshot](/screenshots/preview.jpg)
+![screenshot](/screenshot/preview.jpg)
 
 ### Live Link
 
