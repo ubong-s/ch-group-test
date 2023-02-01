@@ -4,13 +4,17 @@ import placeholderImage from '@/public/images/placeholder-image.png';
 import styles from '@/styles/components/BookCard.module.css';
 
 interface BookToReadCardProps {
+  id: number;
   title: string;
   imageUrl?: string;
+  removeBookFromList: (id: number) => void;
 }
 
 export const BookToReadCard: FC<BookToReadCardProps> = ({
+  id,
   title,
   imageUrl,
+  removeBookFromList,
 }) => {
   return (
     <li>
@@ -24,7 +28,9 @@ export const BookToReadCard: FC<BookToReadCardProps> = ({
 
         <h4>{title}</h4>
 
-        <button type='button'>Remove</button>
+        <button type='button' onClick={() => removeBookFromList(id)}>
+          Remove
+        </button>
       </article>
     </li>
   );

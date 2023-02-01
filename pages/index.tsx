@@ -11,14 +11,14 @@ export default function Home() {
   const [bookList, setBookList] = useState<BookProps[]>([]);
   const [toReadList, setToReadList] = useState<BookToReadProps[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | null>('');
   const [next, setNext] = useState<string | null>(null);
 
   const handleBooksSearch = async (
     e: FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    setError('');
+    setError(null);
     setLoading(true);
     try {
       if (query) {
@@ -47,11 +47,15 @@ export default function Home() {
     setQuery(e.target.value);
   };
 
-  const addBookToReadList = (book: BookToReadProps) => {
+  const addBookToList = (book: BookToReadProps) => {
     setToReadList(toReadList.concat(book));
   };
-  const removeBookFromToReadList = (id: number) => {
+  const removeBookFromList = (id: number) => {
     setToReadList((prev) => prev.filter((book) => book.id !== id));
+  };
+
+  const checkBookInReadlist = (id: number): boolean => {
+    return toReadList.find((book) => book.id === id) ? true : false;
   };
 
   return (
@@ -74,6 +78,9 @@ export default function Home() {
             query={query}
             bookList={bookList}
             toReadList={toReadList}
+            addBookToList={addBookToList}
+            removeBookFromList={removeBookFromList}
+            checkBookInReadlist={checkBookInReadlist}
           />
         </div>
       </main>

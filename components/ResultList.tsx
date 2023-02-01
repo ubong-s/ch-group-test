@@ -1,13 +1,15 @@
 import { BookCard } from './BookCard';
 import styles from '@/styles/components/ResultList.module.css';
-import { BookProps } from '@/types';
+import { BookProps, BookToReadProps } from '@/types';
 import { FC } from 'react';
 
 export const ResultList: FC<{
   loading: boolean;
   query: string;
   bookList: BookProps[];
-}> = ({ loading, query, bookList }) => {
+  addBookToList: (book: BookToReadProps) => void;
+  checkBookInReadlist: (id: number) => boolean;
+}> = ({ loading, query, bookList, addBookToList, checkBookInReadlist }) => {
   if (loading) return <h3>Searching....</h3>;
 
   return (
@@ -21,9 +23,12 @@ export const ResultList: FC<{
             {bookList.map((book) => (
               <BookCard
                 key={book.id}
+                id={book.id}
                 title={book.title}
                 imageUrl={book.formats['image/jpeg']}
                 authors={book.authors}
+                addBookToList={addBookToList}
+                checkBookInReadlist={checkBookInReadlist}
               />
             ))}
           </ul>

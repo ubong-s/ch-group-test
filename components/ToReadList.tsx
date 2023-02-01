@@ -3,8 +3,14 @@ import styles from '@/styles/components/ToReadList.module.css';
 import { BookToReadProps } from '@/types';
 import { BookToReadCard } from './BookToReadCard';
 
-export const ToReadList: FC<{ toReadList: BookToReadProps[] }> = ({
+interface ToReadListProps {
+  toReadList: BookToReadProps[];
+  removeBookFromList: (id: number) => void;
+}
+
+export const ToReadList: FC<ToReadListProps> = ({
   toReadList,
+  removeBookFromList,
 }) => {
   return (
     <div className={styles.to__read}>
@@ -14,8 +20,10 @@ export const ToReadList: FC<{ toReadList: BookToReadProps[] }> = ({
           {toReadList.map((book) => (
             <BookToReadCard
               key={book.id}
+              id={book.id}
               title={book.title}
               imageUrl={book.image}
+              removeBookFromList={removeBookFromList}
             />
           ))}
         </ul>

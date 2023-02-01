@@ -229,5 +229,6 @@ button {
 
 button:disabled {
   cursor: not-allowed;
+  background-color: var(--dusty-gray);
 }
 /* Default Styles End */

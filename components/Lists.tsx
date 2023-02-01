@@ -9,6 +9,9 @@ interface ListProps {
   query: string;
   bookList: BookProps[];
   toReadList: BookToReadProps[];
+  addBookToList: (book: BookToReadProps) => void;
+  removeBookFromList: (id: number) => void;
+  checkBookInReadlist: (id: number) => boolean;
 }
 
 export const Lists: FC<ListProps> = ({
@@ -16,11 +19,23 @@ export const Lists: FC<ListProps> = ({
   query,
   bookList,
   toReadList,
+  addBookToList,
+  removeBookFromList,
+  checkBookInReadlist,
 }) => {
   return (
     <section className={styles.lists}>
-      <ResultList loading={loading} query={query} bookList={bookList} />
-      <ToReadList toReadList={toReadList} />
+      <ResultList
+        loading={loading}
+        query={query}
+        bookList={bookList}
+        addBookToList={addBookToList}
+        checkBookInReadlist={checkBookInReadlist}
+      />
+      <ToReadList
+        toReadList={toReadList}
+        removeBookFromList={removeBookFromList}
+      />
     </section>
   );
 };

@@ -2,6 +2,7 @@ import { FC } from 'react';
 import Image from 'next/image';
 import placeholderImage from '@/public/images/placeholder-image.png';
 import styles from '@/styles/components/BookCard.module.css';
+import { BookToReadProps } from '@/types';
 
 interface BookCardProps {
   id: number;
@@ -12,6 +13,8 @@ interface BookCardProps {
     birth_year: number;
     death_year: number;
   }[];
+  addBookToList: (book: BookToReadProps) => void;
+  checkBookInReadlist: (id: number) => boolean;
 }
 
 export const BookCard: FC<BookCardProps> = ({
@@ -19,6 +22,9 @@ export const BookCard: FC<BookCardProps> = ({
   title,
   imageUrl,
   authors,
+  addBookToList,
+
+  checkBookInReadlist,
 }) => {
   return (
     <li>
@@ -31,14 +37,22 @@ export const BookCard: FC<BookCardProps> = ({
         />
         <div className={styles.info}>
           <h4>{title}</h4>
-          <p className={styles.authors}>
-            By:
-            {authors.map((author, index) => (
-              <span key={index}>{author.name}</span>
-            ))}
-          </p>
+          {authors.length > 0 && (
+            <p className={styles.authors}>
+              By:
+              {authors.map((author, index) => (
+                <span key={index}>{author.name}</span>
+              ))}
+            </p>
+          )}
         </div>
-        <button type='button'>Pick</button>
+        <button
+          type='button'
+          disabled={checkBookInReadlist(id) ? true : false}
+          onClick={() => addBookToList({ id, title, image: imageUrl })}
+        >
+          Pick
+        </button>
       </article>
     </li>
   );

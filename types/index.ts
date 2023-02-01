@@ -31,5 +31,5 @@ export interface BookProps {
 export interface BookToReadProps {
   id: number;
   title: string;
-  image: string;
+  image?: string;
 }
