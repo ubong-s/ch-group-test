@@ -23,7 +23,18 @@ export const SearchBar = () => {
       isLoading: true,
       bookList: [],
     });
+
     try {
+      if (!state.query) {
+        setState({
+          ...state,
+          isLoading: false,
+          bookList: [],
+          queryMore: null,
+          error: `Please provide a valid search`,
+        });
+      }
+
       if (state.query) {
         // Replace space with '%20'
         let searchQuery = state.query.replace(/ /g, '%20');
@@ -44,11 +55,6 @@ export const SearchBar = () => {
                 : null,
           });
         }
-      } else {
-        setState({
-          ...state,
-          bookList: [],
-        });
       }
     } catch (error) {
       console.error(error);
@@ -59,8 +65,6 @@ export const SearchBar = () => {
       });
     }
   };
-
-  console.log(state);
 
   return (
     <section className={styles.search}>

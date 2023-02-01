@@ -59,7 +59,7 @@ export const ResultList = () => {
         <>
           <h3>Search books</h3>
           {state.error && (
-            <h3 className={styles.notification}>
+            <h3 className={styles.error}>
               <h3>{state.error}</h3>
             </h3>
           )}
@@ -68,7 +68,7 @@ export const ResultList = () => {
         <>
           <h2>Result List</h2>
           {state.error && (
-            <h3 className={styles.notification}>
+            <h3 className={styles.error}>
               <h3>{state.error}</h3>
             </h3>
           )}
@@ -99,7 +99,7 @@ export const ResultList = () => {
           </ul>
         </>
       )}
-      {state.isLoading && <h3 className={styles.notification}>Loading....</h3>}
+      {state.isLoading && <h3 className={styles.loading}>Loading....</h3>}
     </div>
   );
 };
