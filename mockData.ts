@@ -1,4 +1,6 @@
-export const dummyResults = [
+import { BookProps } from './types';
+
+export const dummyResults: BookProps[] = [
   {
     id: 1400,
     title: 'Great Expectations',

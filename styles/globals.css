@@ -170,7 +170,13 @@ body {
   background: var(--white);
   font-family: var(--font-mono);
   min-height: 100vh;
-  padding: 4rem 0 2rem;
+  padding: 5rem 0 2rem;
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    overflow: hidden;
+  }
 }
 
 body:-webkit-scrollbar {

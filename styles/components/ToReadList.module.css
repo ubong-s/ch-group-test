@@ -1,8 +1,8 @@
 .to__read {
   padding: 1rem;
-  margin-top: 2rem;
   border: 1px solid var(--black);
   background-color: var(--link-water);
+  margin-top: 2rem;
 }
 
 .to__read h2 {
@@ -16,6 +16,6 @@
 
 @media screen and (min-width: 1024px) {
   .to__read {
-    height: 60vh;
+    height: 70vh;
   }
 }

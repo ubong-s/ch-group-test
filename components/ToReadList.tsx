@@ -1,21 +1,25 @@
-import { dummyResults } from '@/mockData';
-import { BookCard } from './BookCard';
+import { FC } from 'react';
 import styles from '@/styles/components/ToReadList.module.css';
+import { BookToReadProps } from '@/types';
+import { BookToReadCard } from './BookToReadCard';
 
-export const ToReadList = () => {
+export const ToReadList: FC<{ toReadList: BookToReadProps[] }> = ({
+  toReadList,
+}) => {
   return (
     <div className={styles.to__read}>
       <h2>To-read list</h2>
-      <ul>
-        {dummyResults.slice(0, 2).map((book) => (
-          <BookCard
-            key={book.id}
-            title={book.title}
-            imageUrl={book.formats['image/jpeg']}
-            authors={book.authors}
-          />
-        ))}
-      </ul>
+      {toReadList.length > 0 && (
+        <ul>
+          {toReadList.map((book) => (
+            <BookToReadCard
+              key={book.id}
+              title={book.title}
+              imageUrl={book.image}
+            />
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

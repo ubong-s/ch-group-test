@@ -4,6 +4,7 @@ import placeholderImage from '@/public/images/placeholder-image.png';
 import styles from '@/styles/components/BookCard.module.css';
 
 interface BookCardProps {
+  id: number;
   title: string;
   imageUrl?: string;
   authors: {
@@ -13,7 +14,12 @@ interface BookCardProps {
   }[];
 }
 
-export const BookCard: FC<BookCardProps> = ({ title, imageUrl, authors }) => {
+export const BookCard: FC<BookCardProps> = ({
+  id,
+  title,
+  imageUrl,
+  authors,
+}) => {
   return (
     <li>
       <article className={styles.book}>
@@ -32,7 +38,7 @@ export const BookCard: FC<BookCardProps> = ({ title, imageUrl, authors }) => {
             ))}
           </p>
         </div>
-        <button>Pick</button>
+        <button type='button'>Pick</button>
       </article>
     </li>
   );

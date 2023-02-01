@@ -1,11 +1,26 @@
 import styles from '@/styles/components/SearchBar.module.css';
+import { FC, ChangeEvent, FormEvent } from 'react';
 
-export const SearchBar = () => {
+interface SearchBarProps {
+  query: string;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleQueryChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const SearchBar: FC<SearchBarProps> = ({
+  query,
+  handleSubmit,
+  handleQueryChange,
+}) => {
   return (
     <section className={styles.search}>
-      <h2>Search Bar</h2>
-      <form className={styles.form}>
-        <input type='text' placeholder='Search for...' />
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <input
+          type='text'
+          placeholder='Search for...'
+          value={query}
+          onChange={handleQueryChange}
+        />
         <button type='submit'>Search</button>
       </form>
     </section>

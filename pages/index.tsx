@@ -1,8 +1,59 @@
+import { useState, FC, ChangeEvent, FormEvent } from 'react';
 import Head from 'next/head';
-import styles from '@/styles/Home.module.css';
 import { SearchBar, Lists } from '@/components';
+import { BookProps, BookToReadProps } from '@/types';
+import styles from '@/styles/Home.module.css';
+
+const baseUrl = 'https://gutendex.com/books?search=';
 
 export default function Home() {
+  const [query, setQuery] = useState('');
+  const [bookList, setBookList] = useState<BookProps[]>([]);
+  const [toReadList, setToReadList] = useState<BookToReadProps[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [next, setNext] = useState<string | null>(null);
+
+  const handleBooksSearch = async (
+    e: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    try {
+      if (query) {
+        // Replace space with '%20'
+        let searchQuery = query.replace(/ /g, '%20');
+        const response = await fetch(`${baseUrl}${searchQuery}`);
+
+        if (response.status === 200) {
+          const data = await response.json();
+
+          setBookList(data.results);
+          setNext(data.next);
+        }
+      } else {
+        setBookList([]);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+      setError('Error fetching books');
+    }
+  };
+
+  const handleQueryChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setQuery(e.target.value);
+  };
+
+  const addBookToReadList = (book: BookToReadProps) => {
+    setToReadList(toReadList.concat(book));
+  };
+  const removeBookFromToReadList = (id: number) => {
+    setToReadList((prev) => prev.filter((book) => book.id !== id));
+  };
+
   return (
     <>
       <Head>
@@ -13,8 +64,17 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.container}>
-          <SearchBar />
-          <Lists />
+          <SearchBar
+            query={query}
+            handleSubmit={handleBooksSearch}
+            handleQueryChange={handleQueryChange}
+          />
+          <Lists
+            loading={loading}
+            query={query}
+            bookList={bookList}
+            toReadList={toReadList}
+          />
         </div>
       </main>
     </>
