@@ -50,10 +50,11 @@ export const BookCard: FC<BookCardProps> = ({
           <h4>{title}</h4>
           {authors.length > 0 && (
             <p className={styles.authors}>
-              By:
+              [By:
               {authors.map((author, index) => (
                 <span key={index}>{author.name}</span>
               ))}
+              ]
             </p>
           )}
         </div>

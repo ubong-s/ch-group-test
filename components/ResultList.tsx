@@ -8,13 +8,13 @@ export const ResultList = () => {
   const observerRef = useRef<IntersectionObserver>();
 
   const handleMoreBooksSearch = async (): Promise<void> => {
-    setState({
-      ...state,
-      error: null,
-      isLoading: true,
-    });
     try {
       if (state.queryMore) {
+        setState({
+          ...state,
+          error: null,
+          isLoading: true,
+        });
         const response = await fetch(state.queryMore);
 
         if (response.status === 200) {

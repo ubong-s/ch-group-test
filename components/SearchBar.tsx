@@ -39,7 +39,9 @@ export const SearchBar = () => {
             bookList: data.results,
             queryMore: data.next || null,
             error:
-              data.results.length === 0 ? 'Search fetched 0 results' : null,
+              data.results.length === 0
+                ? `Search for "${state.query}" fetched 0 results`
+                : null,
           });
         }
       } else {
